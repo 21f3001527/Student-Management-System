@@ -22,6 +22,11 @@ A REST API built with FastAPI for managing students, courses, enrollments, and g
 - All routes are protected and require a valid JWT token
 - Auto generated interactive API documentation at /docs
 
+## Live Demo
+
+API is live and accessible at:
+https://web-production-617bc.up.railway.app/docs
+
 ## Project Structure
 student-management/
 
@@ -141,3 +146,11 @@ Once the server is running, open http://127.0.0.1:8000/docs in your browser to a
 - Pydantic validation is built in, no need to manually validate request data
 - Type hints make the code cleaner and easier to maintain
 - Automatic 422 error responses for invalid input data
+
+
+## Contact
+
+Rajeev Kumar
+- LinkedIn: https://www.linkedin.com/in/rajeev245/
+- GitHub: https://github.com/21f3001527
+- Email: rajeev90767@gmail.com
