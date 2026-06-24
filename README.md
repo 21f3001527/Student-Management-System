@@ -73,6 +73,16 @@ uvicorn main:app --reload
 
 Once the server is running, open http://127.0.0.1:8000/docs in your browser to access the interactive Swagger UI.
 
+## Screenshots
+
+### API Routes
+![API Routes](screenshots/swagger_routes.png)
+
+### Admin Authentication
+![Authentication](screenshots/swagger_login.png)
+
+### Grades and Enrollments
+![Grades and Enrollments](screenshots/swagger_grades.png)
 ## API Endpoints
 
 ### Admin
