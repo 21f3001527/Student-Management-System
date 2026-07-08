@@ -2,81 +2,19 @@
 
 A REST API built with FastAPI for managing students, courses, enrollments, and grades with JWT based authentication.
 
+**Live Demo:** https://web-production-617bc.up.railway.app/docs
+
 ## Tech Stack
 
-- FastAPI - High performance Python web framework (ASGI based, faster than Flask)
-- SQLModel - Database ORM combining Pydantic and SQLAlchemy
-- JWT Authentication - Secure token based authentication using python-jose
-- passlib - Password hashing with bcrypt
-- SQLite - Lightweight database for development
-- Uvicorn - ASGI server to run the application
+FastAPI · SQLModel · JWT (python-jose) · passlib (bcrypt) · SQLite · Uvicorn
 
 ## Features
 
-- Admin registration and login with JWT tokens
-- Full CRUD for Students, Courses, Enrollments and Grades
-- Student enrollment management in courses
-- Grade assignment and updates per student per course
-- Duplicate checks for emails, course codes and enrollments
-- Marks validation between 0 and 100
-- All routes are protected and require a valid JWT token
-- Auto generated interactive API documentation at /docs
-
-## Live Demo
-
-API is live and accessible at:
-https://web-production-617bc.up.railway.app/docs
-
-## Project Structure
-student-management/
-
-├── main.py                  # App entry point, routers registered here
-
-├── database.py              # Database connection and session dependency
-
-├── models.py                # SQLModel table definitions
-
-├── schemas.py               # Pydantic request and response schemas
-
-├── auth.py                  # JWT token creation, verification and current user dependency
-
-├── requirements.txt         # All project dependencies
-
-├── Procfile                 # Deployment config for Railway
-
-├── .gitignore               # Files ignored by git
-
-├── README.md                # Project documentation
-
-└── routers/
-
-├── init.py          # Makes routers a Python package
-
-├── admin.py             # Admin register and login routes
-
-├── students.py          # Student CRUD routes
-
-├── courses.py           # Course CRUD routes
-
-├── enrollments.py       # Enrollment management routes
-
-└── grades.py            # Grade assignment and management routes
-
-## Installation and Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/21f3001527/student-management.git
-cd student-management
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Start the server
-uvicorn main:app --reload
-```
-
-Once the server is running, open http://127.0.0.1:8000/docs in your browser to access the interactive Swagger UI.
+- JWT-secured admin registration and login
+- Full CRUD for Students, Courses, Enrollments, and Grades
+- Duplicate checks for emails, course codes, and enrollments
+- Marks validation (0-100)
+- Auto-generated Swagger docs at `/docs`
 
 ## Screenshots
 
@@ -88,69 +26,44 @@ Once the server is running, open http://127.0.0.1:8000/docs in your browser to a
 
 ### Grades and Enrollments
 ![Grades and Enrollments](screenshots/swagger_grades.png)
+
+## Setup
+
+```bash
+git clone https://github.com/21f3001527/student-management.git
+cd student-management
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+Visit `http://127.0.0.1:8000/docs` for the interactive Swagger UI.
+
 ## API Endpoints
 
-### Admin
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | /admin/register | Register a new admin account | No |
-| POST | /admin/login | Login and receive JWT token | No |
+| Module | Base Route | Operations |
+|--------|-----------|------------|
+| Admin | `/admin` | register, login |
+| Students | `/students` | POST, GET (all/by id), PATCH, DELETE |
+| Courses | `/courses` | POST, GET (all/by id), PATCH, DELETE |
+| Enrollments | `/enrollments` | POST, GET (all/by student), DELETE |
+| Grades | `/grades` | POST, GET (all/by student), PATCH, DELETE |
 
-### Students
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | /students/ | Add a new student | Yes |
-| GET | /students/ | Get all students | Yes |
-| GET | /students/{id} | Get a student by ID | Yes |
-| PATCH | /students/{id} | Update student details | Yes |
-| DELETE | /students/{id} | Delete a student | Yes |
+All routes except `/admin/register` and `/admin/login` require a valid JWT token.
 
-### Courses
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | /courses/ | Add a new course | Yes |
-| GET | /courses/ | Get all courses | Yes |
-| GET | /courses/{id} | Get a course by ID | Yes |
-| PATCH | /courses/{id} | Update course details | Yes |
-| DELETE | /courses/{id} | Delete a course | Yes |
+## Authentication Flow
 
-### Enrollments
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | /enrollments/ | Enroll a student in a course | Yes |
-| GET | /enrollments/ | Get all enrollments | Yes |
-| GET | /enrollments/student/{id} | Get all enrollments of a student | Yes |
-| DELETE | /enrollments/{id} | Remove an enrollment | Yes |
+1. Register via `POST /admin/register`
+2. Login via `POST /admin/login` to get an access token
+3. Click **Authorize** in Swagger UI (`/docs`) and paste the token
+4. All protected routes become accessible
 
-### Grades
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | /grades/ | Assign a grade to a student | Yes |
-| GET | /grades/ | Get all grades | Yes |
-| GET | /grades/student/{id} | Get all grades of a student | Yes |
-| PATCH | /grades/{id} | Update a grade | Yes |
-| DELETE | /grades/{id} | Delete a grade | Yes |
+## Why FastAPI
 
-## How Authentication Works
-
-1. Register an admin account using POST /admin/register
-2. Login using POST /admin/login and copy the access token from the response
-3. Open Swagger UI at /docs and click the Authorize button at the top right
-4. Paste the token and click Authorize
-5. All protected routes are now accessible from the Swagger UI
-
-## Why FastAPI over Flask
-
-- FastAPI is ASGI based which means it handles async requests natively, making it significantly faster than Flask which is WSGI based
-- Swagger UI is auto generated from type hints, no extra configuration needed
-- Pydantic validation is built in, no need to manually validate request data
-- Type hints make the code cleaner and easier to maintain
-- Automatic 422 error responses for invalid input data
-
+ASGI-based (async by default, faster than Flask's WSGI), auto-generated Swagger docs from type hints, built-in Pydantic validation, and automatic 422 error responses for invalid input.
 
 ## Contact
 
-Rajeev Kumar
-- LinkedIn: https://www.linkedin.com/in/rajeev245/
-- GitHub: https://github.com/21f3001527
+**Rajeev Kumar**
+- LinkedIn: [rajeev245](https://www.linkedin.com/in/rajeev245/)
+- GitHub: [21f3001527](https://github.com/21f3001527)
 - Email: rajeev90767@gmail.com
