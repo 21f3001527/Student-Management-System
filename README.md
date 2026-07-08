@@ -36,13 +36,17 @@ student-management/
 ├── Procfile                     # Deployment config for Railway
 ├── .gitignore
 ├── README.md
-└── routers/
-    ├── __init__.py           # Makes routers a Python package
-    ├── admin.py                # Admin register and login routes
-    ├── students.py              # Student CRUD routes
-    ├── courses.py                 # Course CRUD routes
-    ├── enrollments.py               # Enrollment management routes
-    └── grades.py                      # Grade assignment and management routes
+├── routers/
+│   ├── __init__.py           # Makes routers a Python package
+│   ├── admin.py                # Admin register and login routes
+│   ├── students.py              # Student CRUD routes
+│   ├── courses.py                 # Course CRUD routes
+│   ├── enrollments.py               # Enrollment management routes
+│   └── grades.py                      # Grade assignment and management routes
+└── screenshots/
+    ├── swagger_routes.png     # API routes overview
+    ├── swagger_login.png       # Admin authentication
+    └── swagger_grades.png       # Grades and enrollments
 ```
 
 ## Installation and Setup
